@@ -232,7 +232,7 @@ def run_xgboost(feature_engineered_data):
         ax.set_title(f'Actual vs Predicted for Test set: {item}')
         ax.set_xlabel('Date')
         ax.set_ylabel('Production')
-        st.pyploy(fig)
+        st.pyplot(fig)
 if data is not None:
     run_xgboost(feature_engineered_data)
 
