@@ -200,7 +200,6 @@ def run_xgboost(feature_engineered_data):
 
         X_train, X_test = X[:-14], X[-14:]
         y_train, y_test = y[:-14], y[-14:]
-        st.write("ANA HAWN")
         model = XGBRegressor()
         model.load_model("model.json")
         # Initialize the XGBRegressor with the best hyperparameters
