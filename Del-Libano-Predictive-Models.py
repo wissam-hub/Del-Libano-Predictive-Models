@@ -222,7 +222,8 @@ def run_xgboost(feature_engineered_data):
 
         print(f"Train set metrics: (MAE: {mae_train} | MSE: {mse_train} | RMSE: {rmse_train})")
         print(f"Test set metrics: (MAE: {mae_test} | MSE: {mse_test} | RMSE: {rmse_test})")
-
+        st.title("Actual vs Predicted for Test Set")
+        st.write(f"Item: {item}")
         # Plotting predictions vs actuals for the test set
         fig, ax = plt.subplots(figsize=(12, 6))
         ax.plot(y_test.index, y_test.values, label='Actuals')
@@ -231,7 +232,7 @@ def run_xgboost(feature_engineered_data):
         ax.set_title(f'Actual vs Predicted for Test set: {item}')
         ax.set_xlabel('Date')
         ax.set_ylabel('Production')
-
+        st.pyploy(fig)
 if data is not None:
     run_xgboost(feature_engineered_data)
 
