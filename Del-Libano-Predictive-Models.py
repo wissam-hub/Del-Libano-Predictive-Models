@@ -3,7 +3,7 @@ import pandas as pd
 from xgboost import XGBRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 import matplotlib.pyplot as plt
-
+import numpy as np
 st.markdown("asdasdasd")
 
 def data_preprocessing(data: pd.DataFrame) -> pd.DataFrame:
