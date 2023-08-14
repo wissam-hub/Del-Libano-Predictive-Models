@@ -171,7 +171,7 @@ if data is not None:
     feature_engineered_data = feature_engineering(transformed_data)
     st.write(feature_engineered_data)
 
-'''
+
 
 def run_xgboost(feature_engineered_data):
     # Best hyperparameters obtained from Optuna but with gamma =0
@@ -235,4 +235,4 @@ def run_xgboost(feature_engineered_data):
 
 if data is not None:
     run_xgboost(feature_engineered_data)
-'''
+
