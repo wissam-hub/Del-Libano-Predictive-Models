@@ -75,11 +75,7 @@ def data_preprocessing(data: pd.DataFrame) -> pd.DataFrame:
 
     # Define the item types
     item_types = ['3559 Vermicelli', '3555 Fusilli', '3554 Penne', '3556 Rigate', '3550 Pasta Integrale', '3551 Spaghetti', '3553 Lasagna', '35522 Tagliatelle Ricci', '3552 Tagliatelle']
-    '''
-    new_data.loc[new_data.value < 50, "customer_size"] = "small"
-    new_data.loc[(new_data.value > 50) & (new_data.value < 500) , "customer_size"] = "medium"
-    new_data.loc[new_data.value > 500, "customer_size"] = "big"
-    '''
+    
     # Create dummy variables for the itemType column
     itemType_dummies = pd.get_dummies(new_data['itemType'].astype("str"), prefix='itemType')
 
@@ -204,6 +200,7 @@ def run_xgboost(feature_engineered_data):
 
         X_train, X_test = X[:-14], X[-14:]
         y_train, y_test = y[:-14], y[-14:]
+        st.write("ANA HAWN")
         model = XGBRegressor()
         model.load_model("model.json")
         # Initialize the XGBRegressor with the best hyperparameters
