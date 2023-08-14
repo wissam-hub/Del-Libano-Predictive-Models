@@ -7,3 +7,4 @@ hydralit-components==1.0.10
 openpyxl
 scikit-learn
 xgboost
+numpy
