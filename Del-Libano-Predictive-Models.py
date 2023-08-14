@@ -175,6 +175,7 @@ if data is not None:
 
 def run_xgboost(feature_engineered_data):
     # Best hyperparameters obtained from Optuna but with gamma =0
+    '''
     best_hyperparameters = {
         'max_depth': 4,
         'n_estimators': 555,
@@ -184,7 +185,7 @@ def run_xgboost(feature_engineered_data):
         'colsample_bytree': 0.5868453113051293,
         'gamma': 0 # controls the trade-off between model complexity and fitting the training data
     }
-
+    '''
     X = feature_engineered_data[['documentDate', 'day', 'month', 'year', 'season', 'holiday']]
     X.set_index('documentDate', inplace=True)
     X.index = pd.to_datetime(X.index)
@@ -203,12 +204,13 @@ def run_xgboost(feature_engineered_data):
 
         X_train, X_test = X[:-14], X[-14:]
         y_train, y_test = y[:-14], y[-14:]
-
+        model = XGBRegressor()
+        model.load_model("model.json")
         # Initialize the XGBRegressor with the best hyperparameters
-        model = XGBRegressor(objective='reg:squarederror', **best_hyperparameters)
+        # model = XGBRegressor(objective='reg:squarederror', **best_hyperparameters)
 
         # Train the model
-        model.fit(X_train, y_train)
+        # model.fit(X_train, y_train)
 
         # Make predictions
         y_pred_train = model.predict(X_train)
