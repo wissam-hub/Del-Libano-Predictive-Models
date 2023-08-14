@@ -162,7 +162,6 @@ def load_data():
     uploaded_file = st.file_uploader("Choose an Excel file", type="xlsx")
     if uploaded_file is not None:
         data = pd.read_excel(uploaded_file)
-        st.write(data.head())
         return data
 
 
