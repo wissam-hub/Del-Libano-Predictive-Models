@@ -219,8 +219,7 @@ def run_xgboost(feature_engineered_data):
         mse_train, mse_test = mean_squared_error(y_train, y_pred_train), mean_squared_error(y_test, y_pred_test)
         rmse_train, rmse_test = np.sqrt(mse_train), np.sqrt(mse_test)
 
-        st.write(f"Train set metrics: (MAE: {mae_train} | MSE: {mse_train} | RMSE: {rmse_train})")
-        st.write(f"Test set metrics: (MAE: {mae_test} | MSE: {mse_test} | RMSE: {rmse_test})")
+        
         st.title(f"Actual vs Predicted for {item}")
         # Plotting predictions vs actuals for the test set
         fig, ax = plt.subplots(figsize=(12, 6))
@@ -231,6 +230,8 @@ def run_xgboost(feature_engineered_data):
         ax.set_xlabel('Date')
         ax.set_ylabel('Production')
         st.pyplot(fig)
+        st.write(f"Train set metrics: (MAE: {mae_train} | MSE: {mse_train} | RMSE: {rmse_train})")
+        st.write(f"Test set metrics: (MAE: {mae_test} | MSE: {mse_test} | RMSE: {rmse_test})")
 if data is not None:
     run_xgboost(feature_engineered_data)
 
