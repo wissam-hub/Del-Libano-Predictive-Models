@@ -158,7 +158,7 @@ def feature_engineering(data:pd.DataFrame) -> pd.DataFrame:
 def load_data():
     uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
     if uploaded_file is not None:
-        data = pd.read_csv(uploaded_file)
+        data = pd.read_excel(uploaded_file)
         return data
 
 data = load_data()
