@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
-
+from xgboost import XGBRegressor
+from sklearn.metrics import mean_absolute_error, mean_squared_error
+import matplotlib.pyplot as plt
 
 st.markdown("asdasdasd")
 
@@ -171,4 +173,66 @@ if data is not None:
 
 
 
+def run_xgboost(feature_engineered_data):
+    # Best hyperparameters obtained from Optuna but with gamma =0
+    best_hyperparameters = {
+        'max_depth': 4,
+        'n_estimators': 555,
+        'learning_rate': 0.040389286469709164,
+        'min_child_weight': 7,
+        'subsample': 0.19305186666172608,
+        'colsample_bytree': 0.5868453113051293,
+        'gamma': 0 # controls the trade-off between model complexity and fitting the training data
+    }
+
+    X = feature_engineered_data[['documentDate', 'day', 'month', 'year', 'season', 'holiday']]
+    X.set_index('documentDate', inplace=True)
+    X.index = pd.to_datetime(X.index)
+    X['season'] = X['season'].astype('int')
+
+    items = ['itemType_3551 Spaghetti',
+             'itemType_3552 Tagliatelle', 'itemType_35522 Tagliatelle Ricci',
+             'itemType_3553 Lasagna', 'itemType_3554 Penne', 'itemType_3555 Fusilli',
+             'itemType_3556 Rigate']
+
+    for item in items:
+        print(item)
+        y = feature_engineered_data[['documentDate', item]]
+        y.set_index('documentDate', inplace=True)
+        y.index = pd.to_datetime(y.index)
+
+        X_train, X_test = X[:-14], X[-14:]
+        y_train, y_test = y[:-14], y[-14:]
+
+        # Initialize the XGBRegressor with the best hyperparameters
+        model = XGBRegressor(objective='reg:squarederror', **best_hyperparameters)
+
+        # Train the model
+        model.fit(X_train, y_train)
+
+        # Make predictions
+        y_pred_train = model.predict(X_train)
+        y_pred_train = np.where(y_pred_train < 0, 0, y_pred_train)
+        y_pred_test = model.predict(X_test)
+        y_pred_test = np.where(y_pred_test < 0, 0, y_pred_test)
+
+        # Calculate MAE, MSE, RMSE for train set and test set
+        mae_train, mae_test = mean_absolute_error(y_train, y_pred_train), mean_absolute_error(y_test, y_pred_test)
+        mse_train, mse_test = mean_squared_error(y_train, y_pred_train), mean_squared_error(y_test, y_pred_test)
+        rmse_train, rmse_test = np.sqrt(mse_train), np.sqrt(mse_test)
+
+        print(f"Train set metrics: (MAE: {mae_train} | MSE: {mse_train} | RMSE: {rmse_train})")
+        print(f"Test set metrics: (MAE: {mae_test} | MSE: {mse_test} | RMSE: {rmse_test})")
+
+        # Plotting predictions vs actuals for the test set
+        fig, ax = plt.subplots(figsize=(12, 6))
+        ax.plot(y_test.index, y_test.values, label='Actuals')
+        ax.plot(y_test.index, y_pred_test, color='r', label='Predicted')
+        ax.legend()
+        ax.set_title(f'Actual vs Predicted for Test set: {item}')
+        ax.set_xlabel('Date')
+        ax.set_ylabel('Production')
+
+if data is not None:
+    run_xgboost(feature_engineered_data)
 
