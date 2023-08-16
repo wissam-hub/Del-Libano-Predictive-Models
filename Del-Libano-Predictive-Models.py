@@ -201,7 +201,7 @@ def run_xgboost(selected_item):
     ax.set_xlabel('Date')
     ax.set_ylabel('Production')
     st.pyplot(fig)
-    st.write(f"Test set metrics: (MAE: {mae_test} | MSE: {mse_test} | RMSE: {rmse_test})")
+    st.write(f"Test set metrics: (MAE: {mae_test:.5f} | MSE: {mse_test:.5f} | RMSE: {rmse_test:.5f})")
 
 st.title("Pasta Product Sales Forecasting")
 
