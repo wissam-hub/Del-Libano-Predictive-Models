@@ -356,13 +356,17 @@ items = ['itemType_3551 Spaghetti',
          'itemType_3553 Lasagna', 'itemType_3554 Penne', 'itemType_3555 Fusilli',
          'itemType_3556 Rigate']
 
+
 # Dropdown to select the product for visualization
-selected_product = st.selectbox("Select a product", items)
+selected_product = st.selectbox("Select a product for evaluation", items, key="eval_product")
 
 # Button to show evaluation
 if st.button("Show Evaluation"):
     # Run evaluation function here
     pass
+
+# Dropdown to select the product for forecasting
+selected_product_forecast = st.selectbox("Select a product for forecasting", items, key="forecast_product")
 
 # Button to show forecast
 if st.button("Show Forecast"):
@@ -372,8 +376,4 @@ if st.button("Show Forecast"):
 
     # Loop through all products
     for selected_product in items:
-        forecast_and_visualize(X, model, selected_product, feature_engineered_data)
-
-
-
-
+        forecast_and_visualize(X, model, selected_product_forecast, feature_engineered_data)
