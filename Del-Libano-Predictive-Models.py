@@ -380,7 +380,15 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
 
     # Create a table with the forecasted values
     forecast_table = pd.DataFrame({'Date': future_dates, 'Forecast': y_forecast})
+    
+    # Format the Date column as yyyy-mm-dd
+    forecast_table['Date'] = forecast_table['Date'].dt.strftime('%Y-%m-%d')
+    
+    # Round the Forecast column to 5 decimal places
+    forecast_table['Forecast'] = forecast_table['Forecast'].round(5)
+    
     st.write(forecast_table)
+
 
 # Button to show forecast
 if st.button("Show Forecast"):
