@@ -326,15 +326,19 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     # Forecasting 14 days ahead
     future_dates = pd.date_range(start=last_date, periods=14, freq='D')
     
+    # Prepare future features using your feature engineering logic
     future_features_data = {'documentDate': future_dates}
-    future_features_data['day'] = future_features_data['documentDate'].day
-    future_features_data['month'] = future_features_data['documentDate'].month
-    future_features_data['year'] = future_features_data['documentDate'].year
-    future_features_data = pd.DataFrame(future_features_data)
-
-    
-    future_features = feature_engineering(future_features_data)
+    future_features_data['day'] = future_dates.day
+    future_features_data['month'] = future_dates.month
+    future_features_data['year'] = future_dates.year
+    future_features_data['season'] =  # Set season values as integers
+    future_features_data['holiday'] =  # Set holiday values
+        
+    future_features = pd.DataFrame(future_features_data)
     future_features.set_index('documentDate', inplace=True)
+    
+    # Ensure 'season' is of integer type
+    future_features['season'] = future_features['season'].astype(int)
     
     y_forecast = model.predict(future_features)
     y_forecast = np.where(y_forecast < 0, 0, y_forecast)
@@ -348,6 +352,7 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     ax.set_xlabel('Date')
     ax.set_ylabel('Production')
     st.pyplot(fig)
+
 
 
 # Button to show forecast
