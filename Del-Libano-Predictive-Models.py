@@ -216,8 +216,43 @@ selected_product = st.selectbox("Select a product", items)
 # Button to show evaluation
 if st.button("Show Evaluation"):
     run_xgboost(selected_product)
+    
+def forecast_and_visualize(X, model, selected_product):
+    y = feature_engineered_data[['documentDate', selected_product]]
+    y.set_index('documentDate', inplace=True)
+    y.index = pd.to_datetime(y.index)
 
-# Button to show forecast
+    # Forecasting 14 days ahead
+    future_dates = pd.date_range(start=y.index[-1], periods=14, freq='D')
+    future_features = pd.DataFrame(index=future_dates, columns=X.columns)
+    future_features['day'] = future_features.index.day
+    future_features['month'] = future_features.index.month
+    future_features['year'] = future_features.index.year
+    future_features['season'] =  # Set season values
+    future_features['holiday'] =  # Set holiday values
+        
+    y_forecast = model.predict(future_features)
+    y_forecast = np.where(y_forecast < 0, 0, y_forecast)
+
+    # Plotting forecast
+    fig, ax = plt.subplots(figsize=(12, 6))
+    ax.plot(y.index, y.values, label='Actuals')
+    ax.plot(future_dates, y_forecast, color='r', label='Forecast')
+    ax.legend()
+    ax.set_title(f'Forecast for {selected_product}')
+    ax.set_xlabel('Date')
+    ax.set_ylabel('Production')
+    st.pyplot(fig)
+
 if st.button("Show Forecast"):
-    # You can modify this part to predict 14 observations ahead and visualize the forecast
-    st.write("Feature not implemented yet")
+    X = feature_engineered_data[['documentDate', 'day', 'month', 'year', 'season', 'holiday']]
+    X.set_index('documentDate', inplace=True)
+    X.index = pd.to_datetime(X.index)
+    X['season'] = X['season'].astype('int')
+
+    model = XGBRegressor()
+    model.load_model("model.json")
+
+    # Loop through all products
+    for selected_product in items:
+        forecast_and_visualize(X, model, selected_product)
