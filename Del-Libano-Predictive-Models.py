@@ -326,11 +326,11 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     # Forecasting 14 days ahead
     future_dates = pd.date_range(start=last_date, periods=14, freq='D')
     
-future_features_data = {'documentDate': future_dates}
-future_features_data['day'] = future_features_data['documentDate'].day
-future_features_data['month'] = future_features_data['documentDate'].month
-future_features_data['year'] = future_features_data['documentDate'].year
-future_features_data = pd.DataFrame(future_features_data)
+    future_features_data = {'documentDate': future_dates}
+    future_features_data['day'] = future_features_data['documentDate'].day
+    future_features_data['month'] = future_features_data['documentDate'].month
+    future_features_data['year'] = future_features_data['documentDate'].year
+    future_features_data = pd.DataFrame(future_features_data)
 
     
     future_features = feature_engineering(future_features_data)
