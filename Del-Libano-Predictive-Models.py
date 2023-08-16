@@ -378,6 +378,10 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     ax.set_ylabel('Production')
     st.pyplot(fig)
 
+    # Create a table with the forecasted values
+    forecast_table = pd.DataFrame({'Date': future_dates, 'Forecast': y_forecast})
+    st.write(forecast_table)
+
 # Button to show forecast
 if st.button("Show Forecast"):
     X = feature_engineered_data[['documentDate', 'day', 'month', 'year']]
