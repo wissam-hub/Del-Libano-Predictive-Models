@@ -283,9 +283,14 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     future_features['day'] = future_features['documentDate'].dt.day
     future_features['month'] = future_features['documentDate'].dt.month
     future_features['year'] = future_features['documentDate'].dt.year
+
+
     
     # Use the getSeason function to add the season feature
     future_features = getSeason(future_features)
+    
+    # here
+    future_features['season'] = future_features['season'].astype('int')
     
     # Use the feature_engineering function to add the holiday feature
     future_features = feature_engineering(future_features)
