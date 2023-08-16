@@ -314,38 +314,33 @@ selected_product = st.selectbox("Select a product", items)
 # Button to show evaluation
 if st.button("Show Evaluation"):
     run_xgboost(selected_product)
-    
+    # Function to forecast and visualize sales for a selected product
 def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
-    y = feature_engineered_data[['documentDate', selected_product]]
-    y.set_index('documentDate', inplace=True)
-    y.index = pd.to_datetime(y.index)
-
-    # Get the last date from the available data
+    # Prepare future dates for forecasting
     last_date = feature_engineered_data['documentDate'].max()
+    future_dates = pd.date_range(start=last_date + timedelta(days=1), periods=14, freq='D')
 
-    # Forecasting 14 days ahead
-    future_dates = pd.date_range(start=last_date, periods=14, freq='D')
-    
-    # Prepare future features using your feature engineering logic
+    # Create a DataFrame for future features
     future_features_data = {'documentDate': future_dates}
     future_features_data['day'] = future_dates.day
     future_features_data['month'] = future_dates.month
     future_features_data['year'] = future_dates.year
-    future_features_data['season'] =  # Set season values as integers
-    future_features_data['holiday'] =  # Set holiday values
-        
+    future_features_data['season'] = [get_season_info(date) for date in future_dates]
+    future_features_data['holiday'] = [is_holiday(date) for date in future_dates]
+
     future_features = pd.DataFrame(future_features_data)
     future_features.set_index('documentDate', inplace=True)
-    
+
     # Ensure 'season' is of integer type
     future_features['season'] = future_features['season'].astype(int)
-    
+
+    # Forecast using the XGBoost model
     y_forecast = model.predict(future_features)
     y_forecast = np.where(y_forecast < 0, 0, y_forecast)
 
     # Plotting forecast
     fig, ax = plt.subplots(figsize=(12, 6))
-    ax.plot(y.index, y.values, label='Actuals')
+    ax.plot(feature_engineered_data['documentDate'], feature_engineered_data[selected_product], label='Actuals')
     ax.plot(future_dates, y_forecast, color='r', label='Forecast')
     ax.legend()
     ax.set_title(f'Forecast for {selected_product}')
@@ -353,16 +348,27 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     ax.set_ylabel('Production')
     st.pyplot(fig)
 
+# Streamlit UI
+st.title("Pasta Product Sales Forecasting")
 
+items = ['itemType_3551 Spaghetti',
+         'itemType_3552 Tagliatelle', 'itemType_35522 Tagliatelle Ricci',
+         'itemType_3553 Lasagna', 'itemType_3554 Penne', 'itemType_3555 Fusilli',
+         'itemType_3556 Rigate']
+
+# Dropdown to select the product for visualization
+selected_product = st.selectbox("Select a product", items)
+
+# Button to show evaluation
+if st.button("Show Evaluation"):
+    # Run evaluation function here
+    pass
 
 # Button to show forecast
 if st.button("Show Forecast"):
     X = feature_engineered_data[['documentDate', 'day', 'month', 'year']]
     X.set_index('documentDate', inplace=True)
     X.index = pd.to_datetime(X.index)
-
-    model = XGBRegressor()
-    model.load_model("model.json")
 
     # Loop through all products
     for selected_product in items:
