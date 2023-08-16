@@ -360,10 +360,10 @@ items = ['itemType_3551 Spaghetti',
 # Dropdown to select the product for visualization
 selected_product = st.selectbox("Select a product for evaluation", items, key="eval_product")
 
-# Button to show evaluation
-if st.button("Show Evaluation"):
-    # Run evaluation function here
-    pass
+# # Button to show evaluation
+# if st.button("Show Evaluation"):
+#     # Run evaluation function here
+#     pass
 
 # Dropdown to select the product for forecasting
 selected_product_forecast = st.selectbox("Select a product for forecasting", items, key="forecast_product")
