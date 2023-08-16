@@ -4,7 +4,7 @@ from xgboost import XGBRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 import matplotlib.pyplot as plt
 import numpy as np
-st.markdown("asdasdasd")
+
 
 def data_preprocessing(data: pd.DataFrame) -> pd.DataFrame:
     # Convert "documentDate" column to datetime format
@@ -192,7 +192,6 @@ def run_xgboost(selected_item):
     mse_test = mean_squared_error(y_test, y_pred_test)
     rmse_test = np.sqrt(mse_test)
 
-    st.title(f"Actual vs Predicted for {selected_item}")
     fig, ax = plt.subplots(figsize=(12, 6))
     ax.plot(y_test.index, y_test.values, label='Actuals')
     ax.plot(y_test.index, y_pred_test, color='r', label='Predicted')
