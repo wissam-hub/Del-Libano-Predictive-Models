@@ -217,20 +217,22 @@ selected_product = st.selectbox("Select a product", items)
 if st.button("Show Evaluation"):
     run_xgboost(selected_product)
     
-def forecast_and_visualize(X, model, selected_product):
+def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     y = feature_engineered_data[['documentDate', selected_product]]
     y.set_index('documentDate', inplace=True)
     y.index = pd.to_datetime(y.index)
 
+    # Get the last date from the available data
+    last_date = feature_engineered_data['documentDate'].max()
+
     # Forecasting 14 days ahead
-    future_dates = pd.date_range(start=y.index[-1], periods=14, freq='D')
-    future_features = pd.DataFrame(index=future_dates, columns=X.columns)
-    future_features['day'] = future_features.index.day
-    future_features['month'] = future_features.index.month
-    future_features['year'] = future_features.index.year
-    future_features['season'] =  # Set season values
-    future_features['holiday'] =  # Set holiday values
-        
+    future_dates = pd.date_range(start=last_date, periods=14, freq='D')
+    
+    # Prepare future features using your feature engineering logic
+    future_features = feature_engineering(pd.DataFrame({'documentDate': future_dates}))
+    
+    future_features.set_index('documentDate', inplace=True)
+    
     y_forecast = model.predict(future_features)
     y_forecast = np.where(y_forecast < 0, 0, y_forecast)
 
