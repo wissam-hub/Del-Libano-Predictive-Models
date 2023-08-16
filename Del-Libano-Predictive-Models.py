@@ -161,7 +161,7 @@ def load_data():
         return data
 
 
-data = load_data()
+# data = load_data()
 # if data is not None:
 #     transformed_data = data_preprocessing(data)
 #     feature_engineered_data = feature_engineering(transformed_data)
