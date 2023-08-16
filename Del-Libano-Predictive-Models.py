@@ -217,22 +217,70 @@ selected_product = st.selectbox("Select a product", items)
 if st.button("Show Evaluation"):
     run_xgboost(selected_product)
     
+# def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
+#     y = feature_engineered_data[['documentDate', selected_product]]
+#     y.set_index('documentDate', inplace=True)
+#     y.index = pd.to_datetime(y.index)
+
+#     # Get the last date from the available data
+#     last_date = feature_engineered_data['documentDate'].max()
+
+#     # Forecasting 14 days ahead
+#     future_dates = pd.date_range(start=last_date, periods=14, freq='D')
+    
+#     # Prepare future features using your feature engineering logic
+#     future_features = feature_engineering(pd.DataFrame({'documentDate': future_dates}))
+    
+#     future_features.set_index('documentDate', inplace=True)
+    
+#     y_forecast = model.predict(future_features)
+#     y_forecast = np.where(y_forecast < 0, 0, y_forecast)
+
+#     # Plotting forecast
+#     fig, ax = plt.subplots(figsize=(12, 6))
+#     ax.plot(y.index, y.values, label='Actuals')
+#     ax.plot(future_dates, y_forecast, color='r', label='Forecast')
+#     ax.legend()
+#     ax.set_title(f'Forecast for {selected_product}')
+#     ax.set_xlabel('Date')
+#     ax.set_ylabel('Production')
+#     st.pyplot(fig)
+
+
+# if st.button("Show Forecast"):
+#     X = feature_engineered_data[['documentDate', 'day', 'month', 'year']]
+#     X.set_index('documentDate', inplace=True)
+#     X.index = pd.to_datetime(X.index)
+
+#     model = XGBRegressor()
+#     model.load_model("model.json")
+
+#     # Loop through all products
+#     for selected_product in items:
+#         forecast_and_visualize(X, model, selected_product, feature_engineered_data)
+
+
+
+
+
 def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     y = feature_engineered_data[['documentDate', selected_product]]
     y.set_index('documentDate', inplace=True)
     y.index = pd.to_datetime(y.index)
 
+    model = XGBRegressor()
+    model.load_model("model.json")
+
     # Get the last date from the available data
     last_date = feature_engineered_data['documentDate'].max()
 
     # Forecasting 14 days ahead
-    future_dates = pd.date_range(start=last_date, periods=14, freq='D')
-    
-    # Prepare future features using your feature engineering logic
-    future_features = feature_engineering(pd.DataFrame({'documentDate': future_dates}))
-    
-    future_features.set_index('documentDate', inplace=True)
-    
+    future_dates = pd.date_range(start=last_date + pd.Timedelta(days=1), periods=14, freq='D')
+
+    # Prepare features for the next 14 days using historical data
+    future_features = X.loc[future_dates]
+
+    # Predict using the model
     y_forecast = model.predict(future_features)
     y_forecast = np.where(y_forecast < 0, 0, y_forecast)
 
@@ -246,7 +294,7 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     ax.set_ylabel('Production')
     st.pyplot(fig)
 
-
+# Button to show forecast
 if st.button("Show Forecast"):
     X = feature_engineered_data[['documentDate', 'day', 'month', 'year']]
     X.set_index('documentDate', inplace=True)
@@ -255,8 +303,10 @@ if st.button("Show Forecast"):
     model = XGBRegressor()
     model.load_model("model.json")
 
-    # Loop through all products
+    # Loop through selected product for forecast
     for selected_product in items:
         forecast_and_visualize(X, model, selected_product, feature_engineered_data)
+
+
 
 
