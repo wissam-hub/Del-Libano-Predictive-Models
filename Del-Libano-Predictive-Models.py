@@ -294,6 +294,17 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     ax.set_ylabel('Production')
     st.pyplot(fig)
 
+# Button to show forecast
+if st.button("Show Forecast"):
+    X = feature_engineered_data[['documentDate', 'day', 'month', 'year']]
+    X.set_index('documentDate', inplace=True)
+    X.index = pd.to_datetime(X.index)
 
+    model = XGBRegressor()
+    model.load_model("model.json")
+
+    # Loop through selected product for forecast
+    for selected_product in items:
+        forecast_and_visualize(X, model, selected_product, feature_engineered_data)
 
 
