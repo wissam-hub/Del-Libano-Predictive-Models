@@ -280,14 +280,11 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     future_features['month'] = future_features['documentDate'].dt.month
     future_features['year'] = future_features['documentDate'].dt.year
     
-    # Use the getSeason function to add the season feature
-    future_features = getSeason(future_features)
+    # Use the feature_engineering function to add the season and holiday features
+    future_features = feature_engineering(future_features)
     
     # Convert the season column to an integer data type
     future_features['season'] = future_features['season'].astype('int')
-    
-    # Use the feature_engineering function to add the holiday feature
-    future_features = feature_engineering(future_features)
     
     future_features.set_index('documentDate', inplace=True)
 
@@ -309,14 +306,11 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
 if st.button("Show Forecast"):
     X = feature_engineered_data[['documentDate', 'day', 'month', 'year']]
     
-    # Use the getSeason function to add the season feature
-    X = getSeason(X)
+    # Use the feature_engineering function to add the season and holiday features
+    X = feature_engineering(X)
     
     # Convert the season column to an integer data type
     X['season'] = X['season'].astype('int')
-    
-    # Use the feature_engineering function to add the holiday feature
-    X = feature_engineering(X)
     
     X.set_index('documentDate', inplace=True)
     X.index = pd.to_datetime(X.index)
