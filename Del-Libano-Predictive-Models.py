@@ -272,7 +272,7 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     model.load_model("model.json")
 
     # Get the last date from the available data
-    last_date = feature_engineered_data['documentDate'].max()
+    last_date = X.index.max()
 
     # Forecasting 14 days ahead
     future_dates = pd.date_range(start=last_date + pd.Timedelta(days=1), periods=14, freq='D')
@@ -293,19 +293,6 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     ax.set_xlabel('Date')
     ax.set_ylabel('Production')
     st.pyplot(fig)
-
-# Button to show forecast
-if st.button("Show Forecast"):
-    X = feature_engineered_data[['documentDate', 'day', 'month', 'year']]
-    X.set_index('documentDate', inplace=True)
-    X.index = pd.to_datetime(X.index)
-
-    model = XGBRegressor()
-    model.load_model("model.json")
-
-    # Loop through selected product for forecast
-    for selected_product in items:
-        forecast_and_visualize(X, model, selected_product, feature_engineered_data)
 
 
 
