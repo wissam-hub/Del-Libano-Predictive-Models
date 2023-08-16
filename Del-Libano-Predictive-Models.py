@@ -318,6 +318,7 @@ if st.button("Show Forecast"):
     model = XGBRegressor()
     model.load_model("model.json")
 
-    # Loop through selected product for forecast
-    for selected_product in items:
-        forecast_and_visualize(X, model, selected_product, feature_engineered_data)
+    # # Loop through selected product for forecast
+    # for selected_product in items:
+    #     forecast_and_visualize(X, model, selected_product, feature_engineered_data)
+    forecast_and_visualize(X, model, selected_product, feature_engineered_data)
