@@ -384,9 +384,9 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     # Format the Date column as yyyy-mm-dd
     forecast_table['Date'] = forecast_table['Date'].dt.strftime('%Y-%m-%d')
     
-    # Round the Forecast column to 5 decimal places
-    forecast_table['Forecast'] = forecast_table['Forecast'].round(5)
-    
+    # Round the Forecast column to 5 decimal places using the apply method
+    forecast_table['Forecast'] = forecast_table['Forecast'].apply(lambda x: round(x, 5))
+
     st.write(forecast_table)
 
 
