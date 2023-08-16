@@ -262,7 +262,6 @@ if st.button("Show Evaluation"):
 
 
 
-
 def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     y = feature_engineered_data[['documentDate', selected_product]]
     y.set_index('documentDate', inplace=True)
@@ -277,8 +276,21 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     # Forecasting 14 days ahead
     future_dates = pd.date_range(start=last_date + pd.Timedelta(days=1), periods=14, freq='D')
 
-    # Prepare features for the next 14 days using historical data
-    future_features = X.loc[future_dates]
+    # Create a new DataFrame with the future dates
+    future_features = pd.DataFrame({'documentDate': future_dates})
+    
+    # Apply your feature engineering logic to create the features for the future dates
+    future_features['day'] = future_features['documentDate'].dt.day
+    future_features['month'] = future_features['documentDate'].dt.month
+    future_features['year'] = future_features['documentDate'].dt.year
+    
+    # Use the getSeason function to add the season feature
+    future_features = getSeason(future_features)
+    
+    # Use the feature_engineering function to add the holiday feature
+    future_features = feature_engineering(future_features)
+    
+    future_features.set_index('documentDate', inplace=True)
 
     # Predict using the model
     y_forecast = model.predict(future_features)
@@ -297,6 +309,13 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
 # Button to show forecast
 if st.button("Show Forecast"):
     X = feature_engineered_data[['documentDate', 'day', 'month', 'year']]
+    
+    # Use the getSeason function to add the season feature
+    X = getSeason(X)
+    
+    # Use the feature_engineering function to add the holiday feature
+    X = feature_engineering(X)
+    
     X.set_index('documentDate', inplace=True)
     X.index = pd.to_datetime(X.index)
 
@@ -306,5 +325,3 @@ if st.button("Show Forecast"):
     # Loop through selected product for forecast
     for selected_product in items:
         forecast_and_visualize(X, model, selected_product, feature_engineered_data)
-
-
