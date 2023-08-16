@@ -327,8 +327,13 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     future_dates = pd.date_range(start=last_date, periods=14, freq='D')
     
     # Prepare future features using your feature engineering logic
-    future_features = feature_engineering(pd.DataFrame({'documentDate': future_dates}))
+    future_features_data = {'documentDate': future_dates}
+    future_features_data['day'] = future_features_data['documentDate'].dt.day
+    future_features_data['month'] = future_features_data['documentDate'].dt.month
+    future_features_data['year'] = future_features_data['documentDate'].dt.year
+    future_features_data = pd.DataFrame(future_features_data)
     
+    future_features = feature_engineering(future_features_data)
     future_features.set_index('documentDate', inplace=True)
     
     y_forecast = model.predict(future_features)
@@ -343,6 +348,7 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     ax.set_xlabel('Date')
     ax.set_ylabel('Production')
     st.pyplot(fig)
+
 
 # Button to show forecast
 if st.button("Show Forecast"):
