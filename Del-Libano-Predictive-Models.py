@@ -5,6 +5,8 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error
 import matplotlib.pyplot as plt
 import numpy as np
 
+
+
 # add title and background
 col1, col2 = st.columns([1, 3])
 
@@ -44,7 +46,7 @@ The current app uses a pre-trained model for timely presentation purposes. Once 
 - `gamma`: 0 
 
 """
-
+st.markdown.title(model_info)
 
 
 def data_preprocessing(data: pd.DataFrame) -> pd.DataFrame:
