@@ -22,6 +22,21 @@ import numpy as np
 # col1.image('logo-1.png', width=150)
 # col2.title('Del Libano Biweekly Sales Forecasting')
 
+
+
+
+# st.markdown(
+#     """
+#     <div style="background-color:darkblue; padding: 10px;">
+#         <img src="logo-1.png" style="float:left; width:150px; margin-right:20px;">
+#         <h1 style="color:white; text-align:center;">Deal Libano biweekly Sales Forecasting</h1>
+#     </div>
+#     """,
+#     unsafe_allow_html=True
+# )
+
+
+
 st.markdown(
     """
     <div style="background-color:darkblue; padding: 10px;">
@@ -31,8 +46,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-
 
 
 
