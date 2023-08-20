@@ -25,7 +25,7 @@ import numpy as np
 st.markdown(
     """
     <div style="background-color:darkblue; padding: 10px;">
-        <img src="del_libano_logo.png" style="float:left; width:150px; margin-right:20px;">
+        <img src="logo-1.png" style="float:left; width:150px; margin-right:20px;">
         <h1 style="color:white; text-align:center;">Deal Libano biweekly Sales Forecasting</h1>
     </div>
     """,
