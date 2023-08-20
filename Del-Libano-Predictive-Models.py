@@ -52,33 +52,13 @@ import numpy as np
 
 st.markdown(
     """
-    <style>
-        .header {
-            background-color: darkblue;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-        }
-        .logo {
-            width: 150px;
-        }
-        .header h1 {
-            color: white;
-            margin: 0;
-            text-align: center;
-        }
-    </style>
-    <div class="header">
-        <img src="logo-1.png" alt="Logo" class="logo">
-        <h1>Deal Libano biweekly Sales Forecasting</h1>
+    <div style="background-color: darkblue; padding: 20px; display: flex; align-items: center;">
+        <img src="logo-1.png" alt="Logo" width="150" style="margin-right: 20px;">
+        <h1 style="color: white; margin: 0;">Deal Libano biweekly Sales Forecasting</h1>
     </div>
     """,
     unsafe_allow_html=True
 )
-
-
 
 
 # add side bar for model info 
