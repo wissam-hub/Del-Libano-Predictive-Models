@@ -37,46 +37,18 @@ import numpy as np
 
 
 
-# col1, col2 = st.beta_columns([1, 3])
-
-# col1.image("logo-1.png", width=150)
-
-# col2.markdown(
-#     """
-#     <h1 style="color:white; text-align:center; background-color:darkblue; padding:10px;">
-#         Deal Libano biweekly Sales Forecasting
-#     </h1>
-#     """,
-#     unsafe_allow_html=True
-# )
-
-
-import streamlit as st
-
-st.markdown(
-    """
-    <style>
-        .reportview-container .main .block-container {
-            background-color: darkblue;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-col1, col2 = st.columns([1, 3])
+col1, col2 = st.beta_columns([1, 3])
 
 col1.image("logo-1.png", width=150)
 
 col2.markdown(
     """
-    <h1 style="color:white; text-align:center;">
+    <h1 style="color:white; text-align:center; background-color:darkblue; padding:10px;">
         Deal Libano biweekly Sales Forecasting
     </h1>
     """,
     unsafe_allow_html=True
 )
-
 
 
 
