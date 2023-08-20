@@ -6,6 +6,26 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
+# add title with background
+st.markdown(
+    """
+    <style>
+        .reportview-container .main .block-container {
+            background-color: darkblue;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+col1, col2 = st.columns(2)
+col1.image('logo-1.png', width=150)
+col2.title('Del Libano Biweekly Sales Forecasting')
+
+# add side bar for model info 
+st.sidebar.title('Model Information')
+st.sidebar.write('Here you can include some information about the model and its use.')
+
 def data_preprocessing(data: pd.DataFrame) -> pd.DataFrame:
     # Convert "documentDate" column to datetime format
     data["documentDate"] = pd.to_datetime(data["documentDate"])
