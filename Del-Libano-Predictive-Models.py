@@ -37,18 +37,42 @@ import numpy as np
 
 
 
+# col1, col2 = st.columns([1, 3])
+
+# col1.image("logo-1.png", width=150)
+
+# col2.markdown(
+#     """
+#     <h1 style="color:white; text-align:center; background-color:darkblue; padding:10px;">
+#         Deal Libano biweekly Sales Forecasting
+#     </h1>
+#     """,
+#     unsafe_allow_html=True
+# )
+
+
 col1, col2 = st.columns([1, 3])
 
-col1.image("logo-1.png", width=150)
+with col1:
+    st.image("logo-1.png", width=150)
+    st.markdown(
+        """
+        <h1 style="color:white; text-align:center;">
+            Deal Libano biweekly Sales Forecasting
+        </h1>
+        """,
+        unsafe_allow_html=True
+    )
 
-col2.markdown(
-    """
-    <h1 style="color:white; text-align:center; background-color:darkblue; padding:10px;">
-        Deal Libano biweekly Sales Forecasting
-    </h1>
-    """,
-    unsafe_allow_html=True
-)
+with col2:
+    st.markdown(
+        """
+        <h1 style="color:white; text-align:center; background-color:darkblue; padding:10px;">
+            Deal Libano biweekly Sales Forecasting
+        </h1>
+        """,
+        unsafe_allow_html=True
+    )
 
 
 
