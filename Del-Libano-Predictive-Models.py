@@ -37,12 +37,15 @@ import numpy as np
 
 
 
-st.markdown(
+col1, col2 = st.beta_columns([1, 3])
+
+col1.image("logo-1.png", width=150)
+
+col2.markdown(
     """
-    <div style="background-color:darkblue; padding: 10px;">
-        <img src="logo-1.png" style="float:left; width:150px; margin-right:20px;">
-        <h1 style="color:white; text-align:center;">Deal Libano biweekly Sales Forecasting</h1>
-    </div>
+    <h1 style="color:white; text-align:center; background-color:darkblue; padding:10px;">
+        Deal Libano biweekly Sales Forecasting
+    </h1>
     """,
     unsafe_allow_html=True
 )
