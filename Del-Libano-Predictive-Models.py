@@ -307,6 +307,19 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     ax.set_ylabel('Production')
     st.pyplot(fig)
 
+    # # Create a table with the forecasted values
+    # forecast_table = pd.DataFrame({'Date': future_dates, 'Forecast': y_forecast})
+    
+    # # Format the Date column as yyyy-mm-dd
+    # forecast_table['Date'] = forecast_table['Date'].dt.strftime('%Y-%m-%d')
+    
+    # # Round the Forecast column to 5 decimal places using the apply method
+    # forecast_table['Forecast'] = forecast_table['Forecast'].apply(lambda x: round(x, 5))
+
+    # st.write(forecast_table)
+
+
+# horizontally 
     # Create a table with the forecasted values
     forecast_table = pd.DataFrame({'Date': future_dates, 'Forecast': y_forecast})
     
@@ -315,22 +328,9 @@ def forecast_and_visualize(X, model, selected_product, feature_engineered_data):
     
     # Round the Forecast column to 5 decimal places using the apply method
     forecast_table['Forecast'] = forecast_table['Forecast'].apply(lambda x: round(x, 5))
-
-    st.write(forecast_table)
-
-
-# # horizontally 
-#     # Create a table with the forecasted values
-#     forecast_table = pd.DataFrame({'Date': future_dates, 'Forecast': y_forecast})
     
-#     # Format the Date column as yyyy-mm-dd
-#     forecast_table['Date'] = forecast_table['Date'].dt.strftime('%Y-%m-%d')
-    
-#     # Round the Forecast column to 5 decimal places using the apply method
-#     forecast_table['Forecast'] = forecast_table['Forecast'].apply(lambda x: round(x, 5))
-    
-#     # Display the table horizontally
-#     st.write(forecast_table.set_index('Date').T)
+    # Display the table horizontally
+    st.write(forecast_table.set_index('Date').T)
 
 
 
