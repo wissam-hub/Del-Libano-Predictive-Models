@@ -37,46 +37,19 @@ import numpy as np
 
 
 
-# col1, col2 = st.columns([1, 3])
+col1, col2 = st.columns([1, 3])
 
-# col1.image("logo-1.png", width=150)
+col1.image("logo-1.png", width=150)
 
-# col2.markdown(
-#     """
-#     <h1 style="color:white; text-align:center; background-color:darkblue; padding:10px;">
-#         Deal Libano biweekly Sales Forecasting
-#     </h1>
-#     """,
-#     unsafe_allow_html=True
-# )
-
-import streamlit as st
-
-st.title("Deal Libano biweekly Sales Forecasting")
-st.markdown(
+col2.markdown(
     """
-    <style>
-        .logo-header {
-            background-color: darkblue;
-            color: white;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        .logo {
-            width: 150px;
-        }
-    </style>
-    """
-    "<div class='logo-header'>"
-    f'<img src="logo-1.png" alt="Logo" class="logo">'
-    "<div>"
-    "Deal Libano biweekly Sales Forecasting"
-    "</div>"
-    "</div>",
+    <h1 style="color:white; text-align:center; background-color:darkblue; padding:10px;">
+        Deal Libano biweekly Sales Forecasting
+    </h1>
+    """,
     unsafe_allow_html=True
 )
+
 
 
 # add side bar for model info 
