@@ -14,8 +14,9 @@ col1.image("logo-1.png", width=150)
 
 col2.markdown(
     """
-    <h1 style="color:white; text-align:center; background-color:darkblue; padding:8px;">
-        Deal Libano biweekly Sales Forecasting
+    <h1 style="color:white; text-align:center; background-color:darkblue; padding:10px;">
+        Deal Libano:
+        Biweekly Sales Forecasting
     </h1>
     """,
     unsafe_allow_html=True
@@ -196,7 +197,7 @@ def feature_engineering(data:pd.DataFrame) -> pd.DataFrame:
     return data
 
 def load_data():
-    uploaded_file = st.file_uploader("Choose an Excel file", type="xlsx")
+    uploaded_file = st.file_uploader("Upload the Sales Data as an Excel file", type="xlsx")
     if uploaded_file is not None:
         data = pd.read_excel(uploaded_file)
         return data
@@ -243,7 +244,7 @@ def run_xgboost(selected_item):
     st.pyplot(fig)
     st.write(f"Test set metrics: (MAE: {mae_test:.5f} | MSE: {mse_test:.5f} | RMSE: {rmse_test:.5f})")
 
-st.title("Pasta Product Sales Forecasting")
+# st.title("Pasta Product Sales Forecasting")
 
 items = ['itemType_3551 Spaghetti',
          'itemType_3552 Tagliatelle', 'itemType_35522 Tagliatelle Ricci',
