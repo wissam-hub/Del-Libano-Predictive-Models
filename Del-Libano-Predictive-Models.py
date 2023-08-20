@@ -22,10 +22,27 @@ col2.markdown(
 
 
 
-
-# add side bar for model info 
+# Add sidebar for model info
 st.sidebar.title('Model Information')
-st.sidebar.write('Here you can include some information about the model and its use.')
+
+model_info = """
+This forecasting model employs XGBoost, a powerful gradient boosting algorithm, to predict product demand two weeks in advance.
+
+The current app uses a pre-trained model for timely presentation purposes. Once deployed, the model will retrain on each new dataset. Press 'Show Evaluation' to assess performance on a train-test split and 'Show Forecast' to predict the next two weeks.
+
+**Model Hyperparameters:**
+- `max_depth`: 4
+- `n_estimators`: 555
+- `learning_rate`: 0.0404
+- `min_child_weight`: 7
+- `subsample`: 0.1931
+- `colsample_bytree`: 0.5868
+- `gamma`: 0 (controls model complexity-trade-off)
+
+The model is trained on feature-engineered data with time-related and product-specific attributes. After training, the model evaluates performance using metrics such as MAE, MSE, and RMSE on both training and testing sets. Visualizations are also generated.
+"""
+
+st.sidebar.markdown(model_info)
 
 def data_preprocessing(data: pd.DataFrame) -> pd.DataFrame:
     # Convert "documentDate" column to datetime format
