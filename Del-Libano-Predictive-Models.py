@@ -50,29 +50,26 @@ import numpy as np
 #     unsafe_allow_html=True
 # )
 
-col1, col2 = st.columns([1, 3])
-
-with col1:
-    st.markdown(
-        """
-        <div style="background-color: darkblue; padding: 10px;">
-            <img src="logo-1.png" alt="Logo" width="150">
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-with col2:
-    st.markdown(
-        """
-        <div style="background-color: darkblue; padding: 10px;">
-            <h1 style="color: white; text-align: center;">
-                Deal Libano biweekly Sales Forecasting
-            </h1>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+st.markdown(
+    """
+    <style>
+        .header {
+            background-color: darkblue;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            color: white;
+            margin: 0;
+        }
+    </style>
+    <div class="header">
+        <img src="logo-1.png" alt="Logo" width="150">
+        <h1>Deal Libano biweekly Sales Forecasting</h1>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 
 
