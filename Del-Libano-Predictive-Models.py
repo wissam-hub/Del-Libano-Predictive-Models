@@ -37,7 +37,7 @@ import numpy as np
 
 
 
-col1, col2 = st.beta_columns([1, 3])
+col1, col2 = st.columns([1, 3])
 
 col1.image("logo-1.png", width=150)
 
