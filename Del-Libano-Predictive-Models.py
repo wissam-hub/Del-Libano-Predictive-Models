@@ -50,13 +50,31 @@ import numpy as np
 #     unsafe_allow_html=True
 # )
 
+import streamlit as st
+
+st.title("Deal Libano biweekly Sales Forecasting")
 st.markdown(
     """
-    <div style="background-color: darkblue; padding: 20px; display: flex; align-items: center;">
-        <img src="logo-1.png" alt="Logo" width="150" style="margin-right: 20px;">
-        <h1 style="color: white; margin: 0;">Deal Libano biweekly Sales Forecasting</h1>
-    </div>
-    """,
+    <style>
+        .logo-header {
+            background-color: darkblue;
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .logo {
+            width: 150px;
+        }
+    </style>
+    """
+    "<div class='logo-header'>"
+    f'<img src="logo-1.png" alt="Logo" class="logo">'
+    "<div>"
+    "Deal Libano biweekly Sales Forecasting"
+    "</div>"
+    "</div>",
     unsafe_allow_html=True
 )
 
