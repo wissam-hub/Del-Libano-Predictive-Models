@@ -25,16 +25,13 @@ col2.markdown(
 st.sidebar.title('Model Information')
 
 model_info = """
-
-
-This forecasting model employs XGBoost, a powerful gradient-boosting algorithm, to predict product demand two weeks in advance.
-The current app uses a pre-trained model for timely presentation purposes. Once deployed, the model will retrain on each new dataset and evlauate not only on test but on train too.
+This forecasting model employs XGBoost, a powerful gradient-boosting algorithm, to predict product demand two weeks in advance. The current app uses a pre-trained model for timely presentation purposes. Once deployed, the model will retrain on each new dataset and evaluate not only on the test but also on the train data.
 
 **Functionality:**
-1- Drop Excel dataset generated from Prosper for automatics data preparation and feature engineering
-2- Choose the desired product 
-3- Press 'Show Evaluation' to assess performance on a test split 
-4- Press 'Show Forecast' to predict the next two weeks.
+1. Drop Excel dataset generated from Prosper for automatic data preparation and feature engineering.
+2. Choose the desired product.
+3. Press 'Show Evaluation' to assess performance on a test split.
+4. Press 'Show Forecast' to predict the next two weeks.
 
 **Model Hyperparameters:**
 - `max_depth`: 4
@@ -44,9 +41,10 @@ The current app uses a pre-trained model for timely presentation purposes. Once 
 - `subsample`: 0.1931
 - `colsample_bytree`: 0.5868
 - `gamma`: 0 
-
 """
-st.markdown.title(model_info)
+
+st.sidebar.markdown(model_info)
+
 
 
 def data_preprocessing(data: pd.DataFrame) -> pd.DataFrame:
