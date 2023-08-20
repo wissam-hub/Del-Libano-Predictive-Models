@@ -6,72 +6,20 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-# # add title with background
-# st.markdown(
-#     """
-#     <style>
-#         .reportview-container .main .block-container {
-#             background-color: darkblue;
-#         }
-#     </style>
-#     """,
-#     unsafe_allow_html=True
-# )
 
-# col1, col2 = st.columns(2)
-# col1.image('logo-1.png', width=150)
-# col2.title('Del Libano Biweekly Sales Forecasting')
-
-
-
-
-# st.markdown(
-#     """
-#     <div style="background-color:darkblue; padding: 10px;">
-#         <img src="logo-1.png" style="float:left; width:150px; margin-right:20px;">
-#         <h1 style="color:white; text-align:center;">Deal Libano biweekly Sales Forecasting</h1>
-#     </div>
-#     """,
-#     unsafe_allow_html=True
-# )
-
-
-
-# col1, col2 = st.columns([1, 3])
-
-# col1.image("logo-1.png", width=150)
-
-# col2.markdown(
-#     """
-#     <h1 style="color:white; text-align:center; background-color:darkblue; padding:10px;">
-#         Deal Libano biweekly Sales Forecasting
-#     </h1>
-#     """,
-#     unsafe_allow_html=True
-# )
 col1, col2 = st.columns([1, 3])
 
-with col1:
-    st.markdown(
-        """
-        <div style="background-color: darkblue; padding: 10px;">
-            <img src="logo-1.png" alt="Logo" width="150">
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+col1.image("logo-1.png", width=150)
 
-with col2:
-    st.markdown(
-        """
-        <div style="background-color: darkblue; padding: 10px;">
-            <h1 style="color: white; text-align: center;">
-                Deal Libano biweekly Sales Forecasting
-            </h1>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+col2.markdown(
+    """
+    <h1 style="color:white; text-align:center; background-color:darkblue; padding:10px;">
+        Deal Libano biweekly Sales Forecasting
+    </h1>
+    """,
+    unsafe_allow_html=True
+)
+
 
 
 
