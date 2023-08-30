@@ -15,7 +15,7 @@ col1.image("logo-1.png", width=150)
 col2.markdown(
     """
     <h1 style="color:white; text-align:center; background-color:darkblue; padding:10px;">
-        Deal Libano:
+        Del Libano:
         Biweekly Sales Forecasting
     </h1>
     """,
